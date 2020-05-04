@@ -22,7 +22,7 @@ public class Main {
             int saisie = scanner.nextInt();
             switch (saisie){
                 case 1:
-                    BitcoinService bitcoinService = new BitcoinService();
+                    BitcoinService bitcoinService = new BitcoinService(); // => BitCoinService : new WebPageManager
                     System.out.println("1 BTC = " + bitcoinService.getBitcoinRate() + " €");
                     break;
                 case 2:
