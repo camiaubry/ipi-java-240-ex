@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.StringJoiner;
 
+@Service
 public class WebPageManager {
 
     private HashMap<String, String> cacheContent = new HashMap<>();

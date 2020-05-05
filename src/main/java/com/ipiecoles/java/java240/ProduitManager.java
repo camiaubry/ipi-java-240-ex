@@ -23,6 +23,12 @@ public class ProduitManager {
     @Qualifier("cache")
     private BitcoinService bitcoinService;
 
+
+    public ProduitManager(BitcoinService bitcoinService, WebPageManager webPageManager) {
+        this.webPageManager = webPageManager;
+        this.bitcoinService = bitcoinService;
+    }
+
     /**
      * Méthode qui demande les caractéristiques d'un nouveau produit
      * à l'utilisateur et qui l'ajoute au catalogue

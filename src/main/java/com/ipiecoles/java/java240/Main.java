@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-        ProduitManager pm = ctx.getBean(ProduitManager.class);
-        BitcoinService bitcoinService = ctx.getBean("refreshBitCoinService", BitcoinService.class);
+        WebPageManager webPageManager = new WebPageManager();
+        BitcoinService bitcoinService = new BitcoinService(webPageManager);
+        ProduitManager pm = new ProduitManager(bitcoinService, webPageManager);
 
         System.out.println("Bienvenue !");
         while(true){
@@ -28,6 +28,7 @@ public class Main {
             int saisie = scanner.nextInt();
             switch (saisie){
                 case 1:
+                    //BitcoinService bitcoinService = new BitcoinService();//=> BitcoinService : new WebPageManager 1x
                     System.out.println("1 BTC = " + bitcoinService.getBitcoinRate() + " €");
                     break;
                 case 2:
