@@ -1,17 +1,27 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@Service
 public class ProduitManager {
 
     private List<Produit> produits = new ArrayList<>();
 
-    private BitcoinService bitcoinService = new BitcoinService();
+    @Autowired
+    private WebPageManager webPageManager;
 
-    private WebPageManager webPageManager = new WebPageManager();
+    //@Resource(name = "cacheBitCoinService")
+    @Autowired
+    @Qualifier("cache")
+    private BitcoinService bitcoinService;
 
     /**
      * Méthode qui demande les caractéristiques d'un nouveau produit
@@ -54,6 +64,7 @@ public class ProduitManager {
      * Méthode qui initialise le catalogue à partir d'un fichier distant.
      * @throws IOException
      */
+    @PostConstruct
     public void initialiserCatalogue() throws IOException {
         String catalogue = webPageManager.getPageContentsFromCacheIfExists("https://pjvilloud.github.io/ipi-java-240-cours/catalogue.txt");
         int nbProduits = 0;
